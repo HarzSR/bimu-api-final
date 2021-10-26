@@ -59,7 +59,7 @@
                             <i class="material-icons">developer_board</i>
                         </div>
                         <div class="content">
-                            <div class="text">USERS</div>
+                            <div class="text">DEVICES</div>
                             <div class="number count-to" data-from="0" data-to="{{ $deviceCount }}" data-speed="1000" data-fresh-interval="1"></div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                             <i class="material-icons">done</i>
                         </div>
                         <div class="content">
-                            <div class="text">RECIPES</div>
+                            <div class="text">ACTIVE</div>
                             <div class="number count-to" data-from="0" data-to="{{ $deviceActiveCount }}" data-speed="1000" data-fresh-interval="1"></div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                             <i class="material-icons">yard</i>
                         </div>
                         <div class="content">
-                            <div class="text">USERS</div>
+                            <div class="text">RECIPES</div>
                             <div class="number count-to" data-from="0" data-to="{{ $recipeCount }}" data-speed="1000" data-fresh-interval="1"></div>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                             <i class="material-icons">done</i>
                         </div>
                         <div class="content">
-                            <div class="text">RECIPES</div>
+                            <div class="text">ACTIVE</div>
                             <div class="number count-to" data-from="0" data-to="{{ $recipeActiveCount }}" data-speed="1000" data-fresh-interval="1"></div>
                         </div>
                     </div>

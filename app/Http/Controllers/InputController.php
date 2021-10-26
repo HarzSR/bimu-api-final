@@ -71,7 +71,7 @@ class InputController extends Controller
         else if(isset($data["temperature"]))
         {
             Input::create([
-                'device_mac' => $data['device_mac'],
+                'device_mac' => $data['mac_address'],
                 'temperature' => $data['temperature'],
                 'humidity' => $data['humidity'],
                 'light' => $data['light'],
@@ -80,7 +80,7 @@ class InputController extends Controller
                 'ec_probe' => $data['ec_probe'],
                 'ph_probe' => $data['ph_probe'],
                 'device_rtc' => $data['device_rtc'],
-                'crc' => $data['crc'],
+                'crc' => "",
                 'status' => 1,
             ]);
 
@@ -228,7 +228,8 @@ class InputController extends Controller
     {
         Session::put('page', 'view-inputs');
 
-        $inputs = Input::with('device')->latest()->take(10)->get();
+        $inputs = Input::with('device')->latest()->take(1000)->get();
+        // $inputs = Input::with('device')->latest()->get();
 
         return view('admin.inputs.view_inputs')->with(compact('inputs'));
     }
