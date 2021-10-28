@@ -7,6 +7,7 @@ import time as t
 import json
 import mysql.connector
 import time
+import datetime
 
 mydb = mysql.connector.connect(
   host="localhost",
@@ -95,7 +96,7 @@ def publish(device_mac, result):
     # Publish message to server desired number of times.
     # print('Begin Publish')
     # for i in range (RANGE):
-    mqtt_connection.publish(topic=TOPIC, payload=json.dumps(result, indent=4, sort_keys=True, default=str), qos=mqtt.QoS.AT_LEAST_ONCE)
+    mqtt_connection.publish(topic=TOPIC, payload=json.dumps(result, indent=4, default=str, ensure_ascii=False).replace("\\","")[1:-1], qos=mqtt.QoS.AT_LEAST_ONCE)
     # print("Published: '" + json.dumps(result) + "' to the topic: " + "'test/testing'")
     t.sleep(0.1)
     # print('Publish End')
@@ -107,22 +108,25 @@ value()
 
 while True:
     find = 0
-    time.sleep(5)
+    time.sleep(10)
     new_value()
     # displayDataNew()
     if len(id) != len(new_id):
         value()
     for x in range(len(id)):
         if(status[x] != new_status[x] and new_status[x] == 1):
+            find = 1
             mycursor = mydb.cursor()
             sql = "SELECT * FROM recipes WHERE id = %s"
             adr = (str(new_id[x]),)
             mycursor.execute(sql, adr)
             row_headers = [x[0] for x in mycursor.description]  # this will extract row headers
             rv = mycursor.fetchall()
-            json_data = []
             for result in rv:
-                json_data.append(dict(zip(row_headers, result)))
-            mac = json_data[0]['device_mac']
-            publish(mac, json_data)
-            value()
+                json_data = "{\"recipe_name\": \"" + str(result[3]) + "\", \"fog1\": { \"duration\": \"" + str(result[4]) + "\", \"on\": \"" + str(result[5]) + "\", \"off\": \"" + str(result[6]) + "\", \"start\": \"" + str(datetime.timedelta(seconds=result[7].seconds)) + "\", \"end\": \"" + str(datetime.timedelta(seconds=result[8].seconds)) + "\" }, \"fog2\": { \"duration\": \"" + str(result[9]) + "\", \"on\": \"" + str(result[10]) + "\", \"off\": \"" + str(result[11]) + "\", \"start\": \"" + str(datetime.timedelta(seconds=result[12].seconds)) + "\", \"end\": \"" + str(datetime.timedelta(seconds=result[13].seconds)) + "\" }, \"light1\": { \"red\": \"" + str(result[14]) + "\", \"blue\": \"" + str(result[15]) + "\", \"green\": \"" + str(result[16]) + "\", \"white\": \"" + str(result[17]) + "\", \"bright\": \"" + str(result[18]) + "\", \"start\":\"" + str(datetime.timedelta(seconds=result[19].seconds)) + "\", \"end\": \"" + str(datetime.timedelta(seconds=result[20].seconds)) + "\"}, \"light2\": { \"red\": \"" + str(result[21]) + "\", \"blue\": \"" + str(result[22]) + "\", \"green\": \"" + str(result[23]) + "\", \"white\": \"" + str(result[24]) + "\", \"bright\": \"" + str(result[25]) + "\", \"start\":\"" + str(datetime.timedelta(seconds=result[26].seconds)) + "\", \"end\": \"" + str(datetime.timedelta(seconds=result[27].seconds)) + "\"}}"
+                mac = result[1]
+                publish(mac, json_data)
+
+    if find == 1:
+        find = 0
+        value()
