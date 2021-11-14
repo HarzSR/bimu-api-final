@@ -19,6 +19,8 @@ mydb = mysql.connector.connect(
 
 id, device_mac, status = [], [], []
 new_id, new_device_mac, new_status = [], [], []
+clean_id, clean_mac = [], []
+start_id, start_mac = [], []
 
 def value():
     called = False
@@ -53,6 +55,46 @@ def new_value():
         new_status.append(x[2])
     mycursor.close()
 
+def clean_value():
+    global clean_mac
+    global clean_id
+    clean_id = []
+    clean_mac = []
+    mycursor = mydb.cursor()
+    mycursor.execute("SELECT id,device_mac FROM `commands` WHERE `command` = 'clean-bimu' AND `status` = 1")
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        clean_id.append(x[0])
+        clean_mac.append(x[1])
+    mycursor.close()
+
+def update_clean(row_id, device_mac):
+    mycursor = mydb.cursor()
+    sql = "UPDATE `commands` SET `status` = 0, `updated_at` = current_timestamp WHERE `id` = %s AND `device_mac` = %s"
+    val = (row_id, device_mac)
+    mycursor.execute(sql, val)
+    mydb.commit()
+
+def start_value():
+    global start_mac
+    global start_id
+    start_id = []
+    start_mac = []
+    mycursor = mydb.cursor()
+    mycursor.execute("SELECT id,device_mac FROM `commands` WHERE `command` = 'start-bimu' AND `status` = 1")
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        start_id.append(x[0])
+        start_mac.append(x[1])
+    mycursor.close()
+
+def update_start(row_id, device_mac):
+    mycursor = mydb.cursor()
+    sql = "UPDATE `commands` SET `status` = 0, `updated_at` = current_timestamp WHERE `id` = %s AND `device_mac` = %s"
+    val = (row_id, device_mac)
+    mycursor.execute(sql, val)
+    mydb.commit()
+
 def displayData():
     print("Default")
     for x in range(len(id)):
@@ -63,17 +105,18 @@ def displayDataNew():
     for x in range(len(new_id)):
         print(str(new_id[x]) + "-" + str(new_device_mac[x]) + ":" + str(new_status[x]))
 
-def publish(device_mac, result):
-    # Define ENDPOINT, CLIENT_ID, PATH_TO_CERT, PATH_TO_KEY, PATH_TO_ROOT, MESSAGE, TOPIC, and RANGE
+def displayClean():
+    print("Clean")
+    for x in range(len(clean_id)):
+        print(str(clean_id) + "-" + str(clean_mac))
+
+def publish(device_mac, command, result):
     ENDPOINT = "a23jog5f3gqj1n-ats.iot.ap-southeast-2.amazonaws.com"
     CLIENT_ID = "testDevice"
     PATH_TO_CERT = "bimu_key/2b7232f8ce-certificate.pem.crt"
     PATH_TO_KEY = "bimu_key/2b7232f8ce-certificate.pem.key"
     PATH_TO_ROOT = "bimu_key/AmazonRootCA1.pem"
-    TOPIC = "bimu/recipe/" + device_mac
-    RANGE = 20
-
-    # Spin up resources
+    TOPIC = "bimu/" + command + "/" + device_mac
     event_loop_group = io.EventLoopGroup(1)
     host_resolver = io.DefaultHostResolver(event_loop_group)
     client_bootstrap = io.ClientBootstrap(event_loop_group, host_resolver)
@@ -87,30 +130,23 @@ def publish(device_mac, result):
                 clean_session=False,
                 keep_alive_secs=6
                 )
-    # print("Connecting to {} with client ID '{}'...".format(ENDPOINT, CLIENT_ID))
-    # Make the connect() call
+
     connect_future = mqtt_connection.connect()
-    # Future.result() waits until a result is available
     connect_future.result()
-    # print("Connected!")
-    # Publish message to server desired number of times.
-    # print('Begin Publish')
-    # for i in range (RANGE):
+    # print(TOPIC + " = " + json.dumps(result, indent=4, default=str, ensure_ascii=False).replace("\\","")[1:-1])
     mqtt_connection.publish(topic=TOPIC, payload=json.dumps(result, indent=4, default=str, ensure_ascii=False).replace("\\","")[1:-1], qos=mqtt.QoS.AT_LEAST_ONCE)
-    # print("Published: '" + json.dumps(result) + "' to the topic: " + "'test/testing'")
     t.sleep(0.1)
-    # print('Publish End')
     disconnect_future = mqtt_connection.disconnect()
     disconnect_future.result()
 
 value()
-# displayData()
 
 while True:
     find = 0
     time.sleep(10)
     new_value()
-    # displayDataNew()
+    clean_value()
+    start_value()
     if len(id) != len(new_id):
         value()
     for x in range(len(id)):
@@ -125,8 +161,20 @@ while True:
             for result in rv:
                 json_data = "{\"recipe_name\": \"" + str(result[3]) + "\", \"fog1\": { \"duration\": \"" + str(result[4]) + "\", \"on\": \"" + str(result[5]) + "\", \"off\": \"" + str(result[6]) + "\", \"start\": \"" + str(datetime.timedelta(seconds=result[7].seconds)) + "\", \"end\": \"" + str(datetime.timedelta(seconds=result[8].seconds)) + "\" }, \"fog2\": { \"duration\": \"" + str(result[9]) + "\", \"on\": \"" + str(result[10]) + "\", \"off\": \"" + str(result[11]) + "\", \"start\": \"" + str(datetime.timedelta(seconds=result[12].seconds)) + "\", \"end\": \"" + str(datetime.timedelta(seconds=result[13].seconds)) + "\" }, \"light1\": { \"red\": \"" + str(result[14]) + "\", \"blue\": \"" + str(result[15]) + "\", \"green\": \"" + str(result[16]) + "\", \"white\": \"" + str(result[17]) + "\", \"bright\": \"" + str(result[18]) + "\", \"start\":\"" + str(datetime.timedelta(seconds=result[19].seconds)) + "\", \"end\": \"" + str(datetime.timedelta(seconds=result[20].seconds)) + "\"}, \"light2\": { \"red\": \"" + str(result[21]) + "\", \"blue\": \"" + str(result[22]) + "\", \"green\": \"" + str(result[23]) + "\", \"white\": \"" + str(result[24]) + "\", \"bright\": \"" + str(result[25]) + "\", \"start\":\"" + str(datetime.timedelta(seconds=result[26].seconds)) + "\", \"end\": \"" + str(datetime.timedelta(seconds=result[27].seconds)) + "\"}}"
                 mac = result[1]
-                publish(mac, json_data)
-
+                publish(mac, "recipe", json_data)
     if find == 1:
         find = 0
         value()
+    if len(clean_id) > 0:
+        for x in range(len(clean_id)):
+            json_data = "{\"command\":\"clean-bimu\"}"
+            mac = clean_mac[x]
+            publish(mac, "cmd", json_data)
+            update_clean(clean_id[x], clean_mac[x])
+
+    if len(start_id) > 0:
+        for x in range(len(start_id)):
+            json_data = "{\"command\":\"start-bimu\"}"
+            mac = start_mac[x]
+            publish(mac, "cmd", json_data)
+            update_start(start_id[x], start_mac[x])

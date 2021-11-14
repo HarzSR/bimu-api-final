@@ -34,4 +34,5 @@ Route::middleware('auth:api')->prefix('v1')->group(function() {
     Route::apiResource('/devices', DeviceController::class);
     // Route::post('/devices', [App\Http\Controllers\DeviceController::class, 'store']);
     Route::apiResource('/inputs', InputController::class);
+    Route::get('/command/{mac}/{command}', [App\Http\Controllers\CommandController::class, 'update']);
 });

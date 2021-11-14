@@ -22,6 +22,7 @@ class DeviceResource extends JsonResource
                 'device_mac' => $this->mac_address,
                 'user_id' => $this->user_id,
                 'status' => $this->status,
+                'device_status' => $this->device_status,
                 'success' => 'Yes',
             ]
         ];

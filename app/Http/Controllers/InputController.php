@@ -7,6 +7,7 @@ use App\Http\Resources\InputResource;
 use App\Http\Resources\RecipeResource;
 use App\Models\DefaultRecipe;
 use App\Models\Device;
+use App\Models\DeviceState;
 use App\Models\Input;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
@@ -82,6 +83,12 @@ class InputController extends Controller
                 'device_rtc' => $data['device_rtc'],
                 'crc' => "",
                 'status' => 1,
+            ]);
+
+            DeviceState::create([
+                'device_mac' => $data['mac_address'],
+                'user_id' => $data['user_id'],
+                'device_status' => $data['status'],
             ]);
 
             return response()->json([

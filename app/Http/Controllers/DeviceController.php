@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DeviceRequest;
 use App\Http\Resources\DeviceResource;
+use App\Models\DefaultCommand;
 use App\Models\DefaultRecipe;
 use App\Models\Device;
+use App\Models\DeviceState;
 use App\Models\Input;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
@@ -37,6 +39,7 @@ class DeviceController extends Controller
                         'device_mac' => null,
                         'user_id' => null,
                         'status' => null,
+                        'device_status' => null,
                         'success' => 'No',
                     ]
                 ]
@@ -44,6 +47,12 @@ class DeviceController extends Controller
         }
         else
         {
+            foreach($devices as $device)
+            {
+                $status = DeviceState::where(['device_mac' => $device->mac_address])->latest()->first();
+                $device->device_status = $status->device_status;
+            }
+
             return (DeviceResource::collection($devices))->response()->setStatusCode(200);
         }
 
@@ -82,8 +91,10 @@ class DeviceController extends Controller
         ]);
 
         $defaultRecipes = DefaultRecipe::get();
+        $defaultCommands = DefaultCommand::get();
 
         app('App\Http\Controllers\RecipeController')->create($data, $defaultRecipes);
+        app('App\Http\Controllers\CommandController')->create($data, $defaultCommands);
 
         return (new DeviceResource($device))->response()->setStatusCode(200);
     }
@@ -118,6 +129,9 @@ class DeviceController extends Controller
         }
         else
         {
+            $status = DeviceState::where(['device_mac' => $device->mac_address])->latest()->first();
+            $device->device_status = $status->device_status;
+
             return (new DeviceResource(($device)))->response()->setStatusCode(200);
         }
     }
