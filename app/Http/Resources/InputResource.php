@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\DeviceState;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class InputResource extends JsonResource
@@ -14,6 +15,8 @@ class InputResource extends JsonResource
      */
     public function toArray($request)
     {
+        $status = DeviceState::latest()->where(['device_mac' => $this->device_mac])->first();
+
         return [
             'id' => $this->id,
             'type' => 'Input',
@@ -28,6 +31,7 @@ class InputResource extends JsonResource
                 'ph_probe' => $this->ph_probe,
                 'device_rtc' => $this->device_rtc,
                 'crc' => $this->crc,
+                'status' => $status->device_status,
                 'success' => 'Yes',
             ]
         ];

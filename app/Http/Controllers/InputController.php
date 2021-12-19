@@ -180,6 +180,7 @@ class InputController extends Controller
                         'ph_probe' => null,
                         'device_rtc' => null,
                         'crc' => null,
+                        'status' => null,
                         'success' => 'Yes',
                     ]
                 ], 200);

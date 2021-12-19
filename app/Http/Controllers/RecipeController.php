@@ -328,4 +328,36 @@ class RecipeController extends Controller
 
         return view('admin.recipes.view_recipes')->with(compact('recipes'));
     }
+
+    public function checkName(Request $request)
+    {
+        $data = $request->all();
+
+        $count = Recipe::where(['device_mac' => $data['device_mac'], 'user_id' => auth('api')->user()->id, 'recipe_name' => $data['recipe_name']])->count();
+
+        if($count > 0)
+        {
+            return response()->json([
+                'data' => [
+                    'type' => 'Recipe Name',
+                    'attributes' => [
+                        'success' => 'No',
+                        'message' => 'Name Already Available',
+                    ]
+                ]
+            ], 200);
+        }
+        else
+        {
+            return response()->json([
+                'data' => [
+                    'type' => 'Recipe Name',
+                    'attributes' => [
+                        'success' => 'Yes',
+                        'message' => 'Unique Name',
+                    ]
+                ]
+            ], 200);
+        }
+    }
 }

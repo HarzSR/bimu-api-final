@@ -31,6 +31,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function() {
     Route::apiResource('/recipes', RecipeController::class);
     Route::get('/recipe/{id}/{mac}', [App\Http\Controllers\RecipeController::class, 'edit']);
     Route::put('/recipe/{id}/{mac}', [App\Http\Controllers\RecipeController::class, 'update']);
+    Route::post('/recipe/name', [App\Http\Controllers\RecipeController::class, 'checkName']);
     Route::apiResource('/devices', DeviceController::class);
     // Route::post('/devices', [App\Http\Controllers\DeviceController::class, 'store']);
     Route::apiResource('/inputs', InputController::class);
