@@ -58,42 +58,42 @@
                             </li>
                         </ul>
                     </li>
-                    <li @if(Session::get('page') == "view-devices") class="active" @endif>
+                    <li @if(Session::get('page') == "view-tags") class="active" @endif>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">important_devices</i>
-                            <span>BIMU Devices</span>
+                            <span>Tags</span>
                         </a>
                         <ul class="ml-menu">
                             {{-- <li>
                                 <a href="">Add Devices</a>
                             </li> --}}
-                            <li @if(Session::get('page') == "view-devices") class="active" @endif>
-                                <a href="{{ url('/admin/view-devices') }}">View Devices</a>
+                            <li @if(Session::get('page') == "view-tags") class="active" @endif>
+                                <a href="{{ url('/admin/view-tags') }}">View Tags</a>
                             </li>
                         </ul>
                     </li>
-                    <li @if(Session::get('page') == "view-inputs") class="active" @endif>
+                    <li @if(Session::get('page') == "view-locations") class="active" @endif>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">input</i>
-                            <span>Device Inputs</span>
+                            <span>Location</span>
                         </a>
                         <ul class="ml-menu">
-                            <li @if(Session::get('page') == "view-inputs") class="active" @endif>
-                                <a href="{{ url('/admin/view-inputs') }}">View Data</a>
+                            <li @if(Session::get('page') == "view-locations") class="active" @endif>
+                                <a href="{{ url('/admin/view-locations') }}">View Location</a>
                             </li>
                         </ul>
                     </li>
-                    <li @if(Session::get('page') == "view-recipes") class="active" @endif>
+                    <li @if(Session::get('page') == "view-logs") class="active" @endif>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">yard</i>
-                            <span>Recipes</span>
+                            <i class="material-icons">fingerprint</i>
+                            <span>Logs</span>
                         </a>
                         <ul class="ml-menu">
                             {{-- <li>
                                 <a href="">Add Recipes</a>
                             </li> --}}
-                            <li @if(Session::get('page') == "view-recipes") class="active" @endif>
-                                <a href="{{ url('/admin/view-recipes') }}">View Recipes</a>
+                            <li @if(Session::get('page') == "view-logs") class="active" @endif>
+                                <a href="{{ url('/admin/view-logs') }}">View Logs</a>
                             </li>
                         </ul>
                     </li>

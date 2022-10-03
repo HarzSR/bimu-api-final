@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
         DB::table('admins')->truncate();
 
         $adminRecord = [
-            ["name" => "Admin 1", "type" => "admin", "mobile" => "1234567890", "email" => "admin1@admin.com", "image" => "", "status" => "1", "password" => '$2y$10$jXVNLGs9znPpHlNDast0yeH9ce4P9iry5Xb8j/QW0RrEMC5SWTdT.']
+            ["name" => "Admin 1", "type" => "admin", "mobile" => "1234567890", "email" => "admin1@admin.com", "image" => "", "status" => "1", "password" => '$2y$10$c/wQvMiX49/KVGcPO4tm0OShJKBCAM7noLjCa6gnMSZqfZPowVJ7y']
         ];
 
         // DB::table('users')->insert($userRecord);

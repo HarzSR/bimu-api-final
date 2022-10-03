@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Device;
+use App\Models\Locations;
+use App\Models\Logs;
 use App\Models\Recipe;
+use App\Models\Tags;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,14 +26,17 @@ class AdminController extends Controller
         $userCount = User::count();
         $userActiveCount = User::where(['status' => 1])->count();
         $userInactiveCount = User::where(['status' => 0])->count();
-        $deviceCount = Device::count();
-        $deviceActiveCount = Device::where(['status' => 1])->count();
-        $deviceInactiveCount = Device::where(['status' => 0])->count();
-        $recipeCount = Recipe::count();
-        $recipeActiveCount = Recipe::where(['status' => 1])->count();
-        $recipeInactiveCount = Recipe::where(['status' => 0])->count();
+        $tagsCount = Tags::count();
+        $tagsActiveCount = Tags::where(['status' => 1])->count();
+        $tagsInactiveCount = Tags::where(['status' => 0])->count();
+        $locationCount = Locations::count();
+        $locationActiveCount = Locations::where(['status' => 1])->count();
+        $locationInactiveCount = Locations::where(['status' => 0])->count();
+        $logCount = Logs::count();
+        $logActiveCount = Logs::where(['status' => 1])->count();
+        $logInactiveCount = Logs::where(['status' => 0])->count();
 
-        return view('admin.admin_dashboard')->with(compact('userCount', 'userActiveCount', 'userInactiveCount', 'deviceCount', 'deviceActiveCount', 'deviceInactiveCount', 'recipeCount', 'recipeActiveCount', 'recipeInactiveCount'));
+        return view('admin.admin_dashboard')->with(compact('userCount', 'userActiveCount', 'userInactiveCount', 'tagsCount', 'tagsActiveCount', 'tagsInactiveCount', 'locationCount', 'locationActiveCount', 'locationInactiveCount', 'logCount', 'logActiveCount', 'logInactiveCount'));
     }
 
     // Login Function

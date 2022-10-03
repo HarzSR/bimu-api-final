@@ -36,10 +36,10 @@ Route::prefix('/admin')->namespace('Admin')->group(function ()
 
         Route::get('/view-users', [App\Http\Controllers\Admin\UserController::class, 'viewUsers'])->name('View Users');
 
-        Route::get('/view-devices', [App\Http\Controllers\DeviceController::class, 'viewDevices'])->name('View Devices');
+        Route::get('/view-tags', [App\Http\Controllers\TagsController::class, 'viewTags'])->name('View Tags');
 
-        Route::get('/view-inputs', [App\Http\Controllers\InputController::class, 'viewInputs'])->name('View Inputs');
+        Route::get('/view-locations', [App\Http\Controllers\LocationsController::class, 'viewLocations'])->name('View Locations');
 
-        Route::get('/view-recipes', [App\Http\Controllers\RecipeController::class, 'viewRecipes'])->name('View Recipes');
+        Route::get('/view-logs', [App\Http\Controllers\LogsController::class, 'viewLogs'])->name('View Logs');
     });
 });

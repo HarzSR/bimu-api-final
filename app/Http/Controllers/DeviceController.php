@@ -113,19 +113,19 @@ class DeviceController extends Controller
 
         if(empty($device))
         {
-            return response()->json([
-                'data' => [
-                    'id' => null,
-                    'type' => 'Device',
-                    'attributes' => [
-                        'name' => null,
-                        'device_mac' => null,
-                        'user_id' => null,
-                        'status' => null,
-                        'success' => 'No',
+                return response()->json([
+                    'data' => [
+                        'id' => null,
+                        'type' => 'Device',
+                        'attributes' => [
+                            'name' => null,
+                            'device_mac' => null,
+                            'user_id' => null,
+                            'status' => null,
+                            'success' => 'No',
+                        ]
                     ]
-                ]
-            ], 200);
+                ], 200);
         }
         else
         {
