@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         DB::table('users')->truncate();
 
         $userRecord = [
-            ["name" => "User 1", "email" => "user1@user.com", "status" => "1", "password" => "$2y$10$481CuQ8m4bUXry.TMSMSiutsj0Rfk07J2LiBA85ux9Sw/qhzmQErS"]
+            ["name" => "User 1", "email" => "user1@user.com", "status" => "1", "password" => '$2y$10$mO8fbFJGrm/WCTeHybRlA.G2qVzjjuh8K8v35NzZ4mX3ZE5rZryPi']
         ];
 
         // DB::table('users')->insert($userRecord);
