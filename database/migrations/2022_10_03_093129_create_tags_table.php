@@ -15,13 +15,18 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('tag_name');
-            $table->string('tag_mac_id');
-            $table->string('tag_rssi');
-            $table->dateTime('being_date');
-            $table->dateTime('end_date');
-            $table->tinyInteger('status');
+            $table->string('user_name')->nullable();
+            $table->string('tag_id')->nullable();
+            $table->string('tag_uid')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('tag_name')->nullable();
+            $table->string('tag_mac_id')->nullable();
+            $table->string('tag_rssi')->nullable();
+            $table->string('barcode')->nullable();
+            $table->string('alarm')->default('0');
+            $table->dateTime('being_date')->nullable();
+            $table->dateTime('end_date')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

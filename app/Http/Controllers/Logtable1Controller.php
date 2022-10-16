@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Output;
-use Illuminate\Http\Request;
+use App\Models\Logtable1;
+use App\Http\Requests\StoreLogtable1Request;
+use App\Http\Requests\UpdateLogtable1Request;
 
-class OutputController extends Controller
+class Logtable1Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,6 @@ class OutputController extends Controller
     public function index()
     {
         //
-
-        return response('Invalid Request', 403);
     }
 
     /**
@@ -27,73 +26,61 @@ class OutputController extends Controller
     public function create()
     {
         //
-
-        return response('Invalid Request', 403);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreLogtable1Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLogtable1Request $request)
     {
         //
-
-        return response('Invalid Request', 403);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Output  $output
+     * @param  \App\Models\Logtable1  $logtable1
      * @return \Illuminate\Http\Response
      */
-    public function show(Output $output)
+    public function show(Logtable1 $logtable1)
     {
         //
-
-        return response('Invalid Request', 403);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Output  $output
+     * @param  \App\Models\Logtable1  $logtable1
      * @return \Illuminate\Http\Response
      */
-    public function edit(Output $output)
+    public function edit(Logtable1 $logtable1)
     {
         //
-
-        return response('Invalid Request', 403);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Output  $output
+     * @param  \App\Http\Requests\UpdateLogtable1Request  $request
+     * @param  \App\Models\Logtable1  $logtable1
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Output $output)
+    public function update(UpdateLogtable1Request $request, Logtable1 $logtable1)
     {
         //
-
-        return response('Invalid Request', 403);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Output  $output
+     * @param  \App\Models\Logtable1  $logtable1
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Output $output)
+    public function destroy(Logtable1 $logtable1)
     {
         //
-
-        return response('Invalid Request', 403);
     }
 }

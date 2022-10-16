@@ -15,11 +15,11 @@ class CreateLocationsTable extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->string('location_name');
-            $table->string('location_latlong');
-            $table->dateTime('being_date');
-            $table->dateTime('end_date');
-            $table->tinyInteger('status');
+            $table->string('location_name')->nullable();
+            $table->string('location_latlong')->nullable();
+            $table->dateTime('begin_date')->nullable();
+            $table->dateTime('end_date')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

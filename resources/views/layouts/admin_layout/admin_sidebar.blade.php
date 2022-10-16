@@ -44,15 +44,15 @@
                             </li>
                         </ul>
                     </li>
-                    <li @if(Session::get('page') == "view-users") class="active" @endif>
+                    <li @if(Session::get('page') == "add-users" || Session::get('page') == "view-users") class="active" @endif>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">people</i>
                             <span>Users</span>
                         </a>
                         <ul class="ml-menu">
-                            {{-- <li>
-                                <a href="">Add Users</a>
-                            </li> --}}
+                            <li @if(Session::get('page') == "add-users") class="active" @endif>
+                                <a href="{{ url('/admin/add-users') }}">Add Users</a>
+                            </li>
                             <li @if(Session::get('page') == "view-users") class="active" @endif>
                                 <a href="{{ url('/admin/view-users') }}">View Users</a>
                             </li>
@@ -72,12 +72,15 @@
                             </li>
                         </ul>
                     </li>
-                    <li @if(Session::get('page') == "view-locations") class="active" @endif>
+                    <li @if(Session::get('page') == "add-locations" || Session::get('page') == "view-locations") class="active" @endif>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">input</i>
                             <span>Location</span>
                         </a>
                         <ul class="ml-menu">
+                            <li @if(Session::get('page') == "add-locations") class="active" @endif>
+                                <a href="{{ url('/admin/add-locations') }}">Add Location</a>
+                            </li>
                             <li @if(Session::get('page') == "view-locations") class="active" @endif>
                                 <a href="{{ url('/admin/view-locations') }}">View Location</a>
                             </li>

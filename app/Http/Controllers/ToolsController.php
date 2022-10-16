@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DeviceState;
-use Illuminate\Http\Request;
+use App\Models\Tools;
+use App\Http\Requests\StoreToolsRequest;
+use App\Http\Requests\UpdateToolsRequest;
 
-class DeviceStateController extends Controller
+class ToolsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,10 +31,10 @@ class DeviceStateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreToolsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreToolsRequest $request)
     {
         //
     }
@@ -41,10 +42,10 @@ class DeviceStateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DeviceState  $deviceState
+     * @param  \App\Models\Tools  $tools
      * @return \Illuminate\Http\Response
      */
-    public function show(DeviceState $deviceState)
+    public function show(Tools $tools)
     {
         //
     }
@@ -52,10 +53,10 @@ class DeviceStateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\DeviceState  $deviceState
+     * @param  \App\Models\Tools  $tools
      * @return \Illuminate\Http\Response
      */
-    public function edit(DeviceState $deviceState)
+    public function edit(Tools $tools)
     {
         //
     }
@@ -63,11 +64,11 @@ class DeviceStateController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DeviceState  $deviceState
+     * @param  \App\Http\Requests\UpdateToolsRequest  $request
+     * @param  \App\Models\Tools  $tools
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DeviceState $deviceState)
+    public function update(UpdateToolsRequest $request, Tools $tools)
     {
         //
     }
@@ -75,10 +76,10 @@ class DeviceStateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DeviceState  $deviceState
+     * @param  \App\Models\Tools  $tools
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DeviceState $deviceState)
+    public function destroy(Tools $tools)
     {
         //
     }

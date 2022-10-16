@@ -34,10 +34,12 @@ Route::prefix('/admin')->namespace('Admin')->group(function ()
 
         Route::get('/view-admins', [App\Http\Controllers\Admin\AdminController::class, 'viewAdmins'])->name('View Admins');
 
+        Route::match(['get', 'post'],'/add-users', [App\Http\Controllers\Admin\UserController::class, 'addUsers'])->name('Add Users');
         Route::get('/view-users', [App\Http\Controllers\Admin\UserController::class, 'viewUsers'])->name('View Users');
 
         Route::get('/view-tags', [App\Http\Controllers\TagsController::class, 'viewTags'])->name('View Tags');
 
+        Route::match(['get', 'post'],'/add-locations', [App\Http\Controllers\LocationsController::class, 'addLocations'])->name('Add Locations');
         Route::get('/view-locations', [App\Http\Controllers\LocationsController::class, 'viewLocations'])->name('View Locations');
 
         Route::get('/view-logs', [App\Http\Controllers\LogsController::class, 'viewLogs'])->name('View Logs');

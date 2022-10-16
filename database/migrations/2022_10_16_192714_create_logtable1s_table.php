@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeviceStatesTable extends Migration
+class CreateLogtable1sTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateDeviceStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('device_states', function (Blueprint $table) {
+        Schema::create('logtable1s', function (Blueprint $table) {
             $table->id();
-            $table->string('device_mac');
-            $table->string('user_id');
-            $table->string('device_status');
+            $table->string('tag_id')->nullable();
+            $table->string('tag_uid')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('user_card_id')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateDeviceStatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('device_states');
+        Schema::dropIfExists('logtable1s');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOutputsTable extends Migration
+class CreateToolsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateOutputsTable extends Migration
      */
     public function up()
     {
-        Schema::create('outputs', function (Blueprint $table) {
+        Schema::create('tools', function (Blueprint $table) {
             $table->id();
-            $table->string('device_mac');
-            $table->string('rgbw');
-            $table->string('led_stripe');
-            $table->string('fog');
-            $table->string('fan');
-            $table->string('crc');
+            $table->string('tagId')->nullable();
+            $table->string('locationId')->nullable();
+            $table->string('event')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateOutputsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('outputs');
+        Schema::dropIfExists('tools');
     }
 }

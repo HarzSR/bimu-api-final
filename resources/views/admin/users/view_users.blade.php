@@ -19,6 +19,9 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
+                                            <th>Location</th>
+                                            <th>Card ID</th>
+                                            <th>Barcode</th>
                                             <th>Email</th>
                                             <th>Created on</th>
                                             <th>Status</th>
@@ -29,6 +32,9 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
+                                            <th>Location</th>
+                                            <th>Card ID</th>
+                                            <th>Barcode</th>
                                             <th>Email</th>
                                             <th>Created on</th>
                                             <th>Status</th>
@@ -39,7 +45,10 @@
                                         @foreach($users as $user)
                                             <tr>
                                                 <td>{{ $user->id }}</td>
-                                                <td>{{ ucwords($user->name) }}</td>
+                                                <td>{{ ucwords($user->user_name) }}</td>
+                                                <td>{{ $user->user_location }}</td>
+                                                <td>{{ $user->user_card_id }}</td>
+                                                <td>{{ $user->barcode }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td><?php echo date('d-M-Y h:i A', strtotime($user->created_at)); ?></td>
                                                 <td>
