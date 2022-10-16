@@ -23,9 +23,9 @@ class AdminController extends Controller
     {
         Session::put('page', 'dashboard');
 
-        $userCount = User::count();
-        $userActiveCount = User::where(['status' => 1])->count();
-        $userInactiveCount = User::where(['status' => 0])->count();
+        $userCount = Admin::where([ 'user_type' => 'user'])->count();
+        $userActiveCount = Admin::where(['status' => 1, 'user_type' => 'user'])->count();
+        $userInactiveCount = Admin::where(['status' => 0, 'user_type' => 'user'])->count();
         $tagsCount = Tags::count();
         $tagsActiveCount = Tags::where(['status' => 1])->count();
         $tagsInactiveCount = Tags::where(['status' => 0])->count();
